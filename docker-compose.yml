@@ -3,37 +3,23 @@ services:
   web:
     container_name: web_server
     build: ./fedora_server/
-    image: fedora_server:0.3
+    image: fedora_server:0.4
     working_dir: /var/www/html/
-   # stdin_open: true
-   # tty: true
-    ports:
-      - "8000:80"
     network_mode: host
-  #  networks:
-  #    - dpnet
     cap_add:
       - NET_ADMIN
-   #   - NET_RAW
       - SYS_ADMIN
     security_opt:
       - seccomp:unconfined
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    environment:  
-      ansible_default_ipv4: "127.0.0.1"
 
   db: 
     container_name: db_server
-    image: fedora_server:0.3
-   # stdin_open: true
-   # tty: true
+    image: fedora_server:0.4
     network_mode: "host"
-   # networks:
-    #  - dpnet
     cap_add:
       - NET_ADMIN
-    #  - NET_RAW
       - SYS_ADMIN
     security_opt:
       - seccomp:unconfined
@@ -43,22 +29,12 @@ services:
   ansible:
     container_name: ansible_server
     build: ./fedora_client/
-    image: fedora_client:0.2
+    image: fedora_client:0.4
     working_dir: /home/
     stdin_open: true
     tty: true
-  #  volumes:
     cap_add:
       - NET_ADMIN
-      - NET_RAW
       - SYS_ADMIN
-   # security_opt:
-   #   - seccomp:unconfined
-  #  volumes:
- #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
-networks:
-  dpnet:
-    driver: bridge
