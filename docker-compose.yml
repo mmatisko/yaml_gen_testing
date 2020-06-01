@@ -5,34 +5,35 @@ services:
     build: ./fedora_server/
     image: fedora_server:0.3
     working_dir: /var/www/html/
-    stdin_open: true
-    tty: true
-    ports: 
-      - "1234:22"
+   # stdin_open: true
+   # tty: true
+    ports:
       - "8000:80"
-    networks:
-      - dpnet
+    network_mode: host
+  #  networks:
+  #    - dpnet
     cap_add:
       - NET_ADMIN
-      - NET_RAW
+   #   - NET_RAW
       - SYS_ADMIN
     security_opt:
       - seccomp:unconfined
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:  
+      ansible_default_ipv4: "127.0.0.1"
 
   db: 
     container_name: db_server
     image: fedora_server:0.3
-    stdin_open: true
-    tty: true
-    ports:
-      - "1235:22"
-    networks:
-      - dpnet
+   # stdin_open: true
+   # tty: true
+    network_mode: "host"
+   # networks:
+    #  - dpnet
     cap_add:
       - NET_ADMIN
-      - NET_RAW
+    #  - NET_RAW
       - SYS_ADMIN
     security_opt:
       - seccomp:unconfined
@@ -46,14 +47,16 @@ services:
     working_dir: /home/
     stdin_open: true
     tty: true
-    volumes:
-   # cap_add:
-   #   - SYS_ADMIN
+  #  volumes:
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
    # security_opt:
    #   - seccomp:unconfined
   #  volumes:
  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
-
+    volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
 networks:

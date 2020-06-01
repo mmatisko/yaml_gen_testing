@@ -4,7 +4,9 @@ RUN dnf install -y make nano iputils
 #RUN dnf install -y openssh-server
 RUN dnf install -y supervisor
 RUN dnf install -y sudo procps
-RUN dnf install -y iptables firewalld
+RUN dnf install -y iptables firewalld 
+RUN dnf install -y iproute
+RUN dnf clean all -y
 #RUN dnf install -y chrony firewalld
 
 #RUN mkdir -p /var/run/sshd
@@ -32,4 +34,7 @@ RUN rm -rf /lib/systemd/system/sockets.target.wants/initctl;
 RUN rm -rf /lib/systemd/system/basic.target.wants/;
 RUN rm -rf /lib/systemd/system/anaconda.target.wants/*;
 VOLUME [ “/sys/fs/cgroup” ]
+
+#RUN dnf clean all -y
+
 CMD ["/usr/sbin/init"]

@@ -43,15 +43,14 @@ RUN echo "root:password" | chpasswd
 #CMD ["/usr/bin/ls", "-Al", "/root/program/"]
 #CMD ["/usr/bin/tree", "/root/program/"]
 
-RUN echo ahoj
-
 ADD start.sh /home/start.sh
 
 RUN mkdir /home/program/
 WORKDIR /home/program/
 
+RUN echo ahoj
 RUN git clone https://github.com/mmatisko/yaml_generator.git .
-
+#RUN git checkout 2cd7ba
 #ADD add_hosts.yml /home/program/include/template/lamp_simple_centos8/add_hosts.yml
 
 ENTRYPOINT ["/bin/bash"]

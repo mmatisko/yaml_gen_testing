@@ -1,5 +1,5 @@
 #!/bin/bash
-systemctl start docker
+#systemctl start docker
 
 cd ./program/
 echo "Directory changed to $(pwd)"
