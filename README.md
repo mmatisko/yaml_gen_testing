@@ -3,6 +3,7 @@
 #### REQUIREMENTS
 * dnf/yum package manager-based (virtual) operating system, e.g. fedora, centos
 * installed docker with engine version 19.00+
+* installed docker-compose
 * user located in group wheel (for sudo purposes)
 
 #### GETTING STARTED
