@@ -1,0 +1,61 @@
+version: "3.7"
+services:
+  web:
+    container_name: web_server
+    build: ./fedora_server/
+    image: fedora_server:0.3
+    working_dir: /var/www/html/
+    stdin_open: true
+    tty: true
+    ports: 
+      - "1234:22"
+      - "8000:80"
+    networks:
+      - dpnet
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  db: 
+    container_name: db_server
+    image: fedora_server:0.3
+    stdin_open: true
+    tty: true
+    ports:
+      - "1235:22"
+    networks:
+      - dpnet
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  ansible:
+    container_name: ansible_server
+    build: ./fedora_client/
+    image: fedora_client:0.2
+    working_dir: /home/
+    stdin_open: true
+    tty: true
+    volumes:
+   # cap_add:
+   #   - SYS_ADMIN
+   # security_opt:
+   #   - seccomp:unconfined
+  #  volumes:
+ #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  dpnet:
+    driver: bridge

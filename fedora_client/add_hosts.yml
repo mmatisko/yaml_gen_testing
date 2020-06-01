@@ -1,0 +1,18 @@
+---
+- name: Add docker containers to hosts file 
+  hosts: localhost
+  tasks:
+  - name: Add webserver container to hosts
+    add_host:
+      name: web_server
+      groups: webservers
+      ansible_connection: docker
+
+  - name: Add dbserver container to hosts
+    add_host:
+      name: db_server
+      groups: dbservers
+      ansible_connection: docker
+
+- name: Include regular playbook with filled hosts
+  import_playbook: site.yml
