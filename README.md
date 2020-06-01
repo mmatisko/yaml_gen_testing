@@ -1,5 +1,7 @@
 # Testing environment for Yaml generator
 
+Developed & tested with Fedora 31 & ansible 2.9.x & docker 19.03.x.
+
 #### REQUIREMENTS
 * dnf/yum package manager-based (virtual) operating system, e.g. fedora, centos
 * installed docker with engine version 19.00+
