@@ -11,6 +11,8 @@ Enter to testing root directory (with file docker-compose.yml and folder fedora_
 
 Then open browser and type http://localhost/index.php to see deployed app using database.
 
+After simulation you need to remove content of directory program/output/.
+
 #### TROUBLESHOOTING
 In case of issues, please quit docker-compose(1), restart docker daemon on host(2) and start docker-compose again(3) with following commands:
 1. sudo docker-compose down
