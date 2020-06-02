@@ -12,7 +12,7 @@ echo -e "[webservers]\nweb_server\tansible_connection=docker\n[dbservers]\ndb_se
 
 # run generator
 echo "Generator start!"
-./password_runner.sh '' ./production_ans_gen.sh -G -c include/generator_config.yml \
+./password_runner.sh '' ./production_ans_gen.sh -g -c include/generator_config.yml \
   -d include/template/lamp_simple_centos8/ -o output/
 echo "Generator done!"
 
